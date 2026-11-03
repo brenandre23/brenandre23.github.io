@@ -1,0 +1,36 @@
+{
+  "name": "World Bank cartographic production",
+  "version": 1,
+  "authority": "example-map/AGENTS.md and example-map/CARTOGRAPHY.md",
+  "colors": {
+    "text": "#111111", "muted": "#666666", "focus": "#106ca1",
+    "brand": "#0071BC", "line": "#dce1e4", "ok": "#1a7f4b",
+    "warn": "#8a5a00", "bad": "#b3261e", "panel": "#ffffff",
+    "page": "#e5eef5", "noData": "#e6e6e6", "mapBackground": "#ffffff",
+    "internationalBorder": "#ffffff"
+  },
+  "typography": {
+    "family": "Open Sans", "weights": [400, 600, 700],
+    "bodyLineHeight": 1.5, "headingLineHeight": 1.2,
+    "desktop": {"small": 14, "medium": 16, "large": 20},
+    "tablet": {"small": 13, "medium": 15, "large": 18},
+    "phone": {"small": 12, "medium": 14, "large": 16},
+    "breakpoints": {"tablet": 700, "phone": 399},
+    "numbers": "tabular-nums", "minimumSize": 12
+  },
+  "spacing": {"xxs": 4, "xs": 8, "s": 12, "m": 16, "l": 20, "xl": 24},
+  "shapes": {"inputRadius": 4, "controlRadius": 6, "panelRadius": 7, "frameRadius": 10, "countryCardRadius": 12},
+  "interaction": {"preferredTarget": 44, "minimumTarget": 24, "focusWidth": 3, "motion": "none"},
+  "surfaces": {
+    "map": "flat white", "dashboard": "flat white", "builder": "pale blue",
+    "texture": "none", "shadow": "floating map panels only",
+    "glass": false, "blur": false, "glow": false
+  },
+  "dataColors": {
+    "source": "example-map/wb-carto.js PALETTES",
+    "recommended": ["Blues", "Greens", "Oranges", "OrRd", "WBG Blue"],
+    "defaultClasses": 5,
+    "direction": "light to dark",
+    "chartRelationship": "active map legend class colors"
+  }
+}

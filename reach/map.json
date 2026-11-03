@@ -1,0 +1,34 @@
+{
+  "standardVersion": "2.3.0",
+  "eyebrow": "PORTFOLIO · JUNE – OCTOBER 2026",
+  "source": "Source: Brenan Andre, print maps and interactive maps produced June – October 2026 (country-specific work only; world and regional maps not counted) · World Bank administrative boundaries (WB_GAD)",
+  "dataFile": "data/maps-by-country.csv",
+  "codeColumn": "iso3",
+  "nameColumn": "country",
+  "yearColumn": "year",
+  "countryNames": false,
+  "startView": "flat",
+  "globe": {
+    "basemap": "lightGray",
+    "topography": false,
+    "topoFillOpacity": 0.75
+  },
+  "packageStatus": "draft",
+  "mapId": "",
+  "mapDate": "2026-10",
+  "coverage": "world",
+  "adminLevel": 0,
+  "maps": [
+    {
+      "id": "maps",
+      "tab": "Maps produced",
+      "title": "Maps produced, by country",
+      "column": "maps",
+      "legendTitle": "Maps and dashboards",
+      "unit": "",
+      "decimals": 0,
+      "palette": "Blues",
+      "classes": 4
+    }
+  ]
+}

@@ -1,0 +1,386 @@
+[
+ {
+  "name": "Antimony Mine/Deposit",
+  "file": "antimony-mine-deposit.svg",
+  "size": [
+   9.05,
+   9.05
+  ]
+ },
+ {
+  "name": "Biomass Power Plant",
+  "file": "biomass-power-plant.svg",
+  "size": [
+   16.12,
+   16.12
+  ]
+ },
+ {
+  "name": "Border Crossing",
+  "file": "border-crossing.svg",
+  "size": [
+   8.57,
+   8.57
+  ]
+ },
+ {
+  "name": "Boron Mine/Deposit",
+  "file": "boron-mine-deposit.svg",
+  "size": [
+   9.05,
+   9.05
+  ]
+ },
+ {
+  "name": "Bridge",
+  "file": "bridge.svg",
+  "size": [
+   8.98,
+   8.98
+  ]
+ },
+ {
+  "name": "Bypass",
+  "file": "bypass.svg",
+  "size": [
+   17.37,
+   15.67
+  ]
+ },
+ {
+  "name": "Chromium Mine/Deposit",
+  "file": "chromium-mine-deposit.svg",
+  "size": [
+   9.05,
+   9.05
+  ]
+ },
+ {
+  "name": "Coal Mine/Deposit T1",
+  "file": "coal-mine-deposit-t1.svg",
+  "size": [
+   9.05,
+   9.05
+  ]
+ },
+ {
+  "name": "Coal Mine/Deposit T2",
+  "file": "coal-mine-deposit-t2.svg",
+  "size": [
+   9.84,
+   9.84
+  ]
+ },
+ {
+  "name": "Coal Power Plant",
+  "file": "coal-power-plant.svg",
+  "size": [
+   16.12,
+   16.12
+  ]
+ },
+ {
+  "name": "Cobalt Mine/Deposit",
+  "file": "cobalt-mine-deposit.svg",
+  "size": [
+   9.05,
+   9.05
+  ]
+ },
+ {
+  "name": "Copper Mine/Deposit T1",
+  "file": "copper-mine-deposit-t1.svg",
+  "size": [
+   9.05,
+   9.05
+  ]
+ },
+ {
+  "name": "Copper Mine/Deposit T2",
+  "file": "copper-mine-deposit-t2.svg",
+  "size": [
+   10.72,
+   10.72
+  ]
+ },
+ {
+  "name": "Domestic Airport",
+  "file": "domestic-airport.svg",
+  "size": [
+   8.83,
+   8.74
+  ]
+ },
+ {
+  "name": "Dry Port",
+  "file": "dry-port.svg",
+  "size": [
+   13.32,
+   13.32
+  ]
+ },
+ {
+  "name": "Ferry",
+  "file": "ferry.svg",
+  "size": [
+   21.72,
+   22.88
+  ]
+ },
+ {
+  "name": "Gas Power Plant",
+  "file": "gas-power-plant.svg",
+  "size": [
+   16.12,
+   16.12
+  ]
+ },
+ {
+  "name": "Gold Mine/Deposit",
+  "file": "gold-mine-deposit.svg",
+  "size": [
+   9.05,
+   9.05
+  ]
+ },
+ {
+  "name": "Hydro B",
+  "file": "hydro-b.svg",
+  "size": [
+   10.71,
+   10.71
+  ]
+ },
+ {
+  "name": "Hydro Power Plant",
+  "file": "hydro-power-plant.svg",
+  "size": [
+   16.12,
+   16.12
+  ]
+ },
+ {
+  "name": "International Airport",
+  "file": "international-airport.svg",
+  "size": [
+   11.72,
+   11.72
+  ]
+ },
+ {
+  "name": "Lead Mine/Deposit",
+  "file": "lead-mine-deposit.svg",
+  "size": [
+   9.05,
+   9.05
+  ]
+ },
+ {
+  "name": "Lithium Mine/Deposit",
+  "file": "lithium-mine-deposit.svg",
+  "size": [
+   9.05,
+   9.05
+  ]
+ },
+ {
+  "name": "Magnesium Mine/Deposit",
+  "file": "magnesium-mine-deposit.svg",
+  "size": [
+   9.05,
+   9.05
+  ]
+ },
+ {
+  "name": "Main City",
+  "file": "main-city.svg",
+  "size": [
+   5.78,
+   5.77
+  ]
+ },
+ {
+  "name": "Mountain",
+  "file": "mountain.svg",
+  "size": [
+   18.29,
+   15.97
+  ]
+ },
+ {
+  "name": "National Capital",
+  "file": "national-capital.svg",
+  "size": [
+   8.83,
+   8.53
+  ]
+ },
+ {
+  "name": "Nuclear Power Plant T1",
+  "file": "nuclear-power-plant-t1.svg",
+  "size": [
+   14.19,
+   13.43
+  ]
+ },
+ {
+  "name": "Nuclear Power Plant T2",
+  "file": "nuclear-power-plant-t2.svg",
+  "size": [
+   16.12,
+   16.12
+  ]
+ },
+ {
+  "name": "Oil Field",
+  "file": "oil-field.svg",
+  "size": [
+   18.11,
+   16.13
+  ]
+ },
+ {
+  "name": "Oil Power Plant",
+  "file": "oil-power-plant.svg",
+  "size": [
+   16.12,
+   16.12
+  ]
+ },
+ {
+  "name": "Oil Well",
+  "file": "oil-well.svg",
+  "size": [
+   12.8,
+   22.13
+  ]
+ },
+ {
+  "name": "One Stop Border Post",
+  "file": "one-stop-border-post.svg",
+  "size": [
+   8.57,
+   8.57
+  ]
+ },
+ {
+  "name": "Port",
+  "file": "port.svg",
+  "size": [
+   13.32,
+   13.32
+  ]
+ },
+ {
+  "name": "Power Plant",
+  "file": "power-plant.svg",
+  "size": [
+   30.29,
+   18.3
+  ]
+ },
+ {
+  "name": "Power Station",
+  "file": "power-station.svg",
+  "size": [
+   10.11,
+   10.11
+  ]
+ },
+ {
+  "name": "Project Location",
+  "file": "project-location.svg",
+  "size": [
+   14.47,
+   14.47
+  ]
+ },
+ {
+  "name": "Province Capital",
+  "file": "province-capital.svg",
+  "size": [
+   8.02,
+   8.02
+  ]
+ },
+ {
+  "name": "Pumping Station",
+  "file": "pumping-station.svg",
+  "size": [
+   20.93,
+   20.93
+  ]
+ },
+ {
+  "name": "Silver Mine/Deposit",
+  "file": "silver-mine-deposit.svg",
+  "size": [
+   9.05,
+   9.05
+  ]
+ },
+ {
+  "name": "Solar Power Plant",
+  "file": "solar-power-plant.svg",
+  "size": [
+   16.12,
+   16.12
+  ]
+ },
+ {
+  "name": "Thermal Power Plant",
+  "file": "thermal-power-plant.svg",
+  "size": [
+   16.12,
+   16.12
+  ]
+ },
+ {
+  "name": "Town",
+  "file": "town.svg",
+  "size": [
+   8.87,
+   8.87
+  ]
+ },
+ {
+  "name": "Town B",
+  "file": "town-b.svg",
+  "size": [
+   5.78,
+   5.77
+  ]
+ },
+ {
+  "name": "Uranium Mine",
+  "file": "uranium-mine.svg",
+  "size": [
+   10.22,
+   9.96
+  ]
+ },
+ {
+  "name": "Waste Power Plant",
+  "file": "waste-power-plant.svg",
+  "size": [
+   16.12,
+   16.12
+  ]
+ },
+ {
+  "name": "Wind Power Plant",
+  "file": "wind-power-plant.svg",
+  "size": [
+   16.12,
+   16.12
+  ]
+ },
+ {
+  "name": "Zinc Mine/Deposit",
+  "file": "zinc-mine-deposit.svg",
+  "size": [
+   9.05,
+   9.05
+  ]
+ }
+]

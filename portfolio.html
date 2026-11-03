@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Maps and Dashboards Portfolio</title>
+<meta name="description" content="Brenan Andre, World Bank Cartography Unit: interactive maps, dashboards, print maps and major initiatives, June to October 2026.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Ccircle cx=%2716%27 cy=%2716%27 r=%2714%27 fill=%27%230071BC%27/%3E%3Cpath d=%27M2 16h28M16 2c5 4 5 24 0 28M16 2c-5 4-5 24 0 28%27 stroke=%27white%27 stroke-width=%272%27 fill=%27none%27/%3E%3C/svg%3E">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="masthead">
+  <div class="wrap">
+        <p class="eyebrow" id="eyebrow"></p>
+    <h1>Interactive maps, print maps and major initiatives</h1>
+    <p class="lede" id="lede"></p>
+    <p class="meta"><a href="./">Explore it on the 3D globe →</a></p>
+  </div>
+</header>
+
+<main class="wrap" id="main">
+  <section aria-labelledby="priorities-title">
+    <div class="section-head">
+      <div><h2 id="priorities-title">Five priorities</h2><p class="meta" id="priorities-intro"></p></div>
+    </div>
+    <ol class="priorities" id="priorities"></ol>
+  </section>
+
+  <section class="panel viewer" aria-labelledby="viewer-title">
+    <div class="viewer-head">
+      <div>
+        <p class="eyebrow" id="viewer-ws"></p>
+        <h2 id="viewer-title">Select a map</h2>
+        <p class="meta" id="viewer-meta"></p>
+      </div>
+      <div class="viewer-actions">
+        <button type="button" id="prev" aria-label="Previous map">‹ Previous</button>
+        <button type="button" id="next" aria-label="Next map">Next ›</button>
+        <a class="button primary" id="open" target="_blank" rel="noopener">Open in new tab ↗</a>
+      </div>
+    </div>
+    <div class="stage" id="stage"></div>
+  </section>
+
+  <section aria-labelledby="gallery-title">
+    <div class="section-head">
+      <h2 id="gallery-title">All maps and dashboards</h2>
+      <div class="filters">
+        <label class="search"><span class="sr-only">Search</span><input type="search" id="search" placeholder="Search maps, workstreams…"></label>
+        <div class="chips" id="chips" role="group" aria-label="Filter by type"></div>
+      </div>
+    </div>
+    <p class="meta" id="count" aria-live="polite"></p>
+    <div id="gallery"></div>
+  </section>
+
+  <section class="panel block-pad" aria-labelledby="reach-title">
+    <h2 id="reach-title">Where the maps are</h2>
+    <p class="meta">Country-specific maps and dashboards per country. This map is itself built with the World Bank webmap standard I developed (MapLibre GL and d3, World Bank boundaries and disputed-area rules, 119 automated checks passed).</p>
+    <div class="reach-frame"><iframe src="reach/index.html" title="Maps produced by country (World Bank webmap)"></iframe></div>
+  </section>
+
+  <section aria-labelledby="print-title">
+    <div class="section-head">
+      <div><h2 id="print-title">Print and report maps</h2><p class="meta" id="print-meta"></p></div>
+      <div class="filters">
+        <label class="search"><span class="sr-only">Search print maps</span><input type="search" id="print-search" placeholder="Search titles, codes…"></label>
+        <label><span class="sr-only">Series</span><select id="print-series"></select></label>
+        <label><span class="sr-only">Country or region</span><select id="print-area"></select></label>
+      </div>
+    </div>
+    <div class="panel chart-panel"><h3>Production calendar</h3><p class="meta">Print maps by the day they were last worked on. Click a day to see its maps.</p><div class="echart" id="print-chart"></div></div>
+    <p class="meta" id="print-count" aria-live="polite"></p>
+    <div id="print-gallery"></div>
+  </section>
+
+  <section class="panel block-pad" aria-labelledby="glance-title">
+    <h2 id="glance-title">All the work at a glance</h2>
+    <div class="tm-wrap"><div class="echart" id="treemap"></div><div class="tm-thumbs" id="treemap-thumbs" aria-hidden="true"></div></div>
+    <div class="legend" id="treemap-legend"></div>
+  </section>
+
+  <section id="timeline-section" aria-labelledby="timeline-title" hidden>
+    <div class="section-head"><h2 id="timeline-title">Timeline</h2></div>
+    <ol class="timeline" id="timeline"></ol>
+  </section>
+
+  <section aria-labelledby="initiatives-title">
+    <div class="section-head">
+      <h2 id="initiatives-title">Major initiatives</h2>
+      <p class="meta">From individual maps toward platform architecture, automation, self-service tooling, cloud infrastructure, GeoAI prototyping, data stewardship and capacity building.</p>
+    </div>
+    <div class="initiatives" id="initiatives"></div>
+  </section>
+</main>
+
+<dialog id="lightbox" aria-labelledby="lb-title">
+  <div class="lb-head">
+    <div><p class="eyebrow" id="lb-series"></p><h2 id="lb-title"></h2><p class="meta" id="lb-meta"></p></div>
+    <div class="viewer-actions">
+      <button type="button" id="lb-prev" aria-label="Previous map">‹</button>
+      <button type="button" id="lb-next" aria-label="Next map">›</button>
+      <a class="button primary" id="lb-pdf" target="_blank" rel="noopener">Open PDF ↗</a>
+      <button type="button" id="lb-close" aria-label="Close">Close</button>
+    </div>
+  </div>
+  <img id="lb-img" alt="">
+</dialog>
+<section class="wrap colophon" aria-labelledby="built-title">
+  <h2 id="built-title">How this site is built</h2>
+  <ul>
+    <li><strong>Charts:</strong> Apache ECharts 5 (SVG rendering, a text description of every chart for screen readers), themed with the World Bank brand tokens.</li>
+    <li><strong>Maps:</strong> the World Bank webmap standard I built: MapLibre GL JS and d3, Equal Earth projection, World Bank boundaries and disputed-area rules, and the standard’s automated checks (the reach map above passes all 119).</li>
+    <li><strong>Front end:</strong> plain HTML, CSS and JavaScript with no build step; responsive from 360 to 1440 px; live embeds load one at a time.</li>
+    <li><strong>Data:</strong> the content lives in small data files (<code>data.js</code>, <code>print-maps.js</code>), so adding a map is one line; thumbnails and print images are generated from the source PDFs.</li>
+    <li><strong>Self-contained:</strong> fonts and libraries are bundled, so it runs on an internal server with no outside calls except the embedded maps themselves.</li>
+  </ul>
+</section>
+<footer class="wrap footer" id="footer"></footer>
+<script src="vendor/echarts.min.js"></script>
+<script src="charts.js"></script>
+<script src="data.js"></script>
+<script src="value-config.js"></script>
+<script src="print-maps.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

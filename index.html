@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Brenan Andre · Map Portfolio</title>
+<meta name="description" content="Brenan Andre, World Bank Cartography Unit: print maps, interactive maps and dashboards by country and workstream, June to October 2026.">
+<meta name="theme-color" content="#030b16">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Ccircle cx=%2716%27 cy=%2716%27 r=%2714%27 fill=%27%230071BC%27/%3E%3Cpath d=%27M2 16h28M16 2c5 4 5 24 0 28M16 2c-5 4-5 24 0 28%27 stroke=%27white%27 stroke-width=%272%27 fill=%27none%27/%3E%3C/svg%3E">
+<link rel="stylesheet" href="globe.css">
+</head>
+<body>
+<a class="skip" href="#drawer">Skip to the list of maps</a>
+
+<div class="stage" id="stage">
+  <canvas id="globe" aria-hidden="true"></canvas>
+  <div class="orbit" id="orbit" aria-hidden="true"></div>
+  <div class="pin-label" id="pin-label" hidden></div>
+  <div class="tooltip" id="tooltip" role="status" hidden></div>
+</div>
+
+<header class="topbar">
+  <a class="brand" href="./" aria-label="Brenan Andre, map portfolio home">
+    <span class="brand-mark" aria-hidden="true"></span>
+    <span><strong>Brenan Andre</strong><small>Geospatial &amp; cartography</small></span>
+  </a>
+  <nav class="topnav" aria-label="Portfolio">
+    <a href="portfolio.html#gallery-title">All dashboards</a>
+    <a href="portfolio.html#print-title">Print maps</a>
+    <a class="pill" href="portfolio.html">Full portfolio <span aria-hidden="true">→</span></a>
+  </nav>
+</header>
+
+<section class="hero" aria-labelledby="hero-title">
+  <p class="eyebrow" id="hero-eyebrow">World Bank Cartography Unit · June – October 2026</p>
+  <h1 id="hero-title">Maps and dashboards for <span class="grad">World Bank teams</span>, country by country.</h1>
+  <dl class="stats" id="stats"></dl>
+</section>
+
+<aside class="drawer" id="drawer" aria-label="Maps and dashboards" tabindex="-1">
+  <div class="drawer-grip" aria-hidden="true"></div>
+  <div class="drawer-head">
+    <button type="button" class="back" id="back" hidden><span aria-hidden="true">←</span> Overview</button>
+    <p class="eyebrow" id="drawer-eyebrow"></p>
+    <h2 id="drawer-title"></h2>
+    <p class="drawer-meta" id="drawer-meta"></p>
+  </div>
+  <div class="drawer-body" id="drawer-body"></div>
+</aside>
+
+<footer class="legend" aria-label="How to read the globe">
+  <span><i class="lg-dot" aria-hidden="true"></i>Country with print or interactive work (taller = more products)</span>
+  <span><i class="lg-card" aria-hidden="true"></i>Orbiting cards: global dashboards and maps, live on Design Studio</span>
+  <span class="hint" id="hint">Drag to turn · scroll to zoom · click a pin or card</span>
+</footer>
+
+<noscript><p class="noscript">This page needs JavaScript. The <a href="portfolio.html">full portfolio</a> lists every map and dashboard.</p></noscript>
+
+<script src="data.js"></script>
+<script src="print-maps.js"></script>
+<script src="globe-geo.js"></script>
+<script src="vendor/three/three.min.js"></script>
+<script src="globe.js"></script>
+</body>
+</html>

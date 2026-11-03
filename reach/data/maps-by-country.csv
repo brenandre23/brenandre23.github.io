@@ -1,0 +1,18 @@
+iso3,country,year,maps,print_maps,interactive
+AGO,"Angola",2026,3,1,2
+BWA,"Botswana",2026,6,6,0
+COD,"Congo, Dem. Rep.",2026,11,11,0
+DOM,"Dominican Republic",2026,5,4,1
+IND,"India",2026,10,10,0
+IRQ,"Iraq",2026,1,1,0
+LBR,"Liberia",2026,1,1,0
+MLI,"Mali",2026,1,1,0
+NRU,"Nauru",2026,1,1,0
+RWA,"Rwanda",2026,1,1,0
+SSD,"South Sudan",2026,2,2,0
+SYR,"Syrian Arab Republic",2026,1,1,0
+TLS,"Timor-Leste",2026,1,1,0
+UKR,"Ukraine",2026,2,2,0
+YEM,"Yemen, Rep.",2026,4,4,0
+ZAF,"South Africa",2026,1,1,0
+ZMB,"Zambia",2026,1,1,0

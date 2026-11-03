@@ -1,0 +1,745 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "World Bank webmap: map.json",
+  "description": "The one project file besides data/. Everything a map may change is listed here; the rest is the standard (AGENTS.md). validateConfig() in wb-carto.js enforces it when the map loads.",
+  "type": "object",
+  "required": [
+    "source",
+    "dataFile",
+    "codeColumn",
+    "yearColumn",
+    "maps"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "standardVersion": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$",
+      "description": "Standard version the map was made with (written by the tools)."
+    },
+    "eyebrow": {
+      "type": "string",
+      "description": "Small caps line above the title. Say ILLUSTRATIVE for sample data."
+    },
+    "source": {
+      "type": "string",
+      "minLength": 10,
+      "description": "Source line, on screen and in every export."
+    },
+    "dataFile": {
+      "type": "string",
+      "pattern": "^data/",
+      "description": "Main CSV: one row per economy."
+    },
+    "codeColumn": {
+      "type": "string",
+      "description": "ISO3 / WB code column. Joins are by code, never by name."
+    },
+    "nameColumn": {
+      "type": "string",
+      "description": "Names in the data, added to search. Empty to skip."
+    },
+    "yearColumn": {
+      "type": "string",
+      "description": "Observation year column."
+    },
+    "countryNames": {
+      "type": "boolean",
+      "default": false,
+      "description": "WB country names on at start-up."
+    },
+    "startView": {
+      "enum": [
+        "flat",
+        "globe"
+      ],
+      "default": "flat"
+    },
+    "globe": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "basemap": {
+          "enum": [
+            "none",
+            "lightGray"
+          ],
+          "default": "lightGray"
+        },
+        "topography": {
+          "type": "boolean",
+          "default": false,
+          "description": "Terrain layer; meant for non-choropleth maps."
+        },
+        "topoFillOpacity": {
+          "type": "number",
+          "minimum": 0.5,
+          "maximum": 1,
+          "default": 0.75
+        }
+      }
+    },
+    "print": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Print exports (print PNG, Print or save as PDF): a 6.5 in wide frame.",
+      "properties": {
+        "orientation": {
+          "enum": [
+            "landscape",
+            "portrait"
+          ],
+          "default": "landscape",
+          "description": "6.5 × 4.5 in or 6.5 × 9 in."
+        },
+        "dpi": {
+          "enum": [
+            150,
+            300,
+            600
+          ],
+          "default": 300
+        }
+      }
+    },
+    "packageStatus": {
+      "enum": [
+        "draft",
+        "final"
+      ],
+      "default": "draft",
+      "description": "final needs mapId and mapDate, both given by the user."
+    },
+    "mapId": {
+      "type": "string",
+      "pattern": "^(IBRD \\d{5})?$",
+      "description": "Map number, e.g. \"IBRD 49374\" (IBRD + 5 digits). The user gives it; never invent one. Empty while draft."
+    },
+    "mapDate": {
+      "type": "string",
+      "pattern": "^(\\d{4}-(0[1-9]|1[0-2]))?$",
+      "description": "YYYY-MM, shown as OCTOBER 2026 in the stamp. The user gives it with the map number."
+    },
+    "coverage": {
+      "default": "world",
+      "description": "The part of the world the map is about. Economies outside it are neighbors in light gray (#f2f2f2) with no value. Views, Home and exports fit it. \"world\" (Equal Earth), or an object with region, countries or bbox.",
+      "oneOf": [
+        {
+          "const": "world"
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "anyOf": [
+            {
+              "required": [
+                "region"
+              ]
+            },
+            {
+              "required": [
+                "countries"
+              ]
+            },
+            {
+              "required": [
+                "bbox"
+              ]
+            }
+          ],
+          "not": {
+            "required": [
+              "region",
+              "countries"
+            ]
+          },
+          "properties": {
+            "region": {
+              "enum": [
+                "AFE",
+                "AFW",
+                "SSF",
+                "EAS",
+                "ECS",
+                "LCN",
+                "MEA",
+                "NAC",
+                "SAS"
+              ],
+              "description": "World Bank region (WB_REGION in the WB Global Administrative Divisions service). SSF = AFE + AFW."
+            },
+            "countries": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "type": "string",
+                "pattern": "^[A-Z]{3}$"
+              },
+              "description": "ISO3 codes of the economies the map covers, e.g. [\"KEN\"]. Use CHN for Taiwan, China."
+            },
+            "bbox": {
+              "type": "array",
+              "minItems": 4,
+              "maxItems": 4,
+              "items": {
+                "type": "number"
+              },
+              "description": "[west, south, east, north] in degrees: an area of interest, or the extent to show for a region or countries."
+            },
+            "padding": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 0.5,
+              "default": 0.06,
+              "description": "Margin around the extent, as a share of the map width."
+            },
+            "projection": {
+              "enum": [
+                "auto",
+                "equalEarth",
+                "azimuthalEqualArea",
+                "conicEqualArea",
+                "transverseMercator"
+              ],
+              "default": "auto",
+              "description": "auto: Equal Earth centred on a region; Lambert azimuthal equal-area centred on countries or an area."
+            }
+          }
+        }
+      ]
+    },
+    "context": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "anyOf": [
+          {"enum": ["lakes", "rivers", "roads", "railways", "towns", "elevation"]},
+          {"type": "string", "pattern": "^[a-z0-9][a-z0-9-]{0,40}$", "description": "A catalog lines or areas layer (wb-catalog-layer), with its kind, style and labels in data/context/manifest.json"}
+        ]
+      },
+      "description": "Context layers in data/context/, built by the standard's tools/context_build.py from the recipes in gis/layers/ (CONTEXT-LAYERS.md). Drawn bottom to top as catalog areas, lakes, rivers, roads, railways, catalog lines, towns; their attribution joins the source line. Needs coverage.countries or coverage.bbox."
+    },
+    "terrain": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "How the elevation grid (context \"elevation\") is drawn, in the map's projection, on the flat view and in exports. Default: hillshade only.",
+      "properties": {
+        "hillshade": {
+          "type": "boolean",
+          "default": true
+        },
+        "contours": {
+          "type": "boolean",
+          "default": false,
+          "description": "Contour lines at an interval chosen from the elevation range (about a dozen levels), every fifth thicker."
+        },
+        "tints": {
+          "type": "boolean",
+          "default": false,
+          "description": "Elevation tints (hypsometric colors) under the hillshade; listed in the legend."
+        }
+      }
+    },
+    "adminLines": {
+      "enum": [
+        0,
+        1,
+        2
+      ],
+      "default": 0,
+      "description": "Admin 1 (or 1 and 2) lines from the WB boundary tiles on a map whose fills are economies (a reference or location map). Admin maps draw their own level's lines."
+    },
+    "adminLevel": {
+      "enum": [
+        0,
+        1,
+        2
+      ],
+      "default": 0,
+      "description": "0: economies (data/geometry.json). 1 or 2: the World Bank admin units of coverage.countries, from data/admin/ (tools/admin_pack.py); the data joins on ADM1CD_c or ADM2CD_c codes."
+    },
+    "maps": {
+      "type": "array",
+      "minItems": 1,
+      "description": "One entry per tab.",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "title",
+          "legendTitle"
+        ],
+        "allOf": [
+          {
+            "if": {
+              "required": [
+                "mapTemplate"
+              ],
+              "properties": {
+                "mapTemplate": {
+                  "enum": [
+                    "locator",
+                    "heatmap"
+                  ]
+                }
+              }
+            },
+            "then": {
+              "required": [
+                "spatialData"
+              ],
+              "properties": {
+                "spatialData": {
+                  "properties": {
+                    "kind": {
+                      "const": "points"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "required": [
+                "mapTemplate"
+              ],
+              "properties": {
+                "mapTemplate": {
+                  "const": "flow"
+                }
+              }
+            },
+            "then": {
+              "required": [
+                "spatialData"
+              ],
+              "properties": {
+                "spatialData": {
+                  "properties": {
+                    "kind": {
+                      "const": "flows"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "required": [
+                "mapTemplate"
+              ],
+              "properties": {
+                "mapTemplate": {
+                  "const": "route"
+                }
+              }
+            },
+            "then": {
+              "required": [
+                "spatialData"
+              ],
+              "properties": {
+                "spatialData": {
+                  "properties": {
+                    "kind": {
+                      "const": "routes"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "mapTemplate": {
+                  "enum": [
+                    "choropleth",
+                    "extrusion",
+                    "reference"
+                  ]
+                }
+              }
+            },
+            "then": {
+              "not": {
+                "required": [
+                  "spatialData"
+                ]
+              }
+            }
+          },
+          {
+            "if": {
+              "required": [
+                "mapTemplate"
+              ],
+              "properties": {
+                "mapTemplate": {
+                  "const": "proportional-symbol"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "spatialData": {
+                  "properties": {
+                    "kind": {
+                      "const": "points"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]+$"
+          },
+          "tab": {
+            "type": "string",
+            "description": "Short tab label (defaults to title)."
+          },
+          "title": {
+            "type": "string"
+          },
+          "type": {
+            "enum": [
+              "timeseries"
+            ],
+            "description": "Animated time series with its own CSV (one column per year)."
+          },
+          "mapTemplate": {
+            "enum": [
+              "choropleth",
+              "proportional-symbol",
+              "locator",
+              "flow",
+              "route",
+              "heatmap",
+              "extrusion",
+              "reference",
+              "raster"
+            ],
+            "default": "choropleth",
+            "description": "Thematic map technique. Published geography, borders, labels and Equal Earth exports remain unchanged. Extrusion is a globe view of country values; flat exports show its choropleth."
+          },
+          "raster": {
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]{0,40}$",
+            "description": "mapTemplate raster: the layer in data/raster/ (population, landcover, or a reviewed raster such as flood-depth), built by the standard's tools/raster_build.py. Continuous layers need palette; categorical ones use their recipe's colors."
+          },
+          "spatialData": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "dataFile",
+              "kind"
+            ],
+            "description": "Separate original or derived thematic observation CSV. Coordinates are WGS84 longitude/latitude; values remain missing when blank. Four-digit time years only.",
+            "properties": {
+              "dataFile": {
+                "type": "string",
+                "pattern": "^data/(?!\\.{1,2}/)(?!.*?/\\.{1,2}/)(?!.*//)[^\\\\?#:%]+\\.[cC][sS][vV]$"
+              },
+              "kind": {
+                "enum": [
+                  "points",
+                  "flows",
+                  "routes"
+                ]
+              },
+              "latitudeColumn": {
+                "type": "string",
+                "minLength": 1
+              },
+              "longitudeColumn": {
+                "type": "string",
+                "minLength": 1
+              },
+              "sourceLatitudeColumn": {
+                "type": "string",
+                "minLength": 1
+              },
+              "sourceLongitudeColumn": {
+                "type": "string",
+                "minLength": 1
+              },
+              "targetLatitudeColumn": {
+                "type": "string",
+                "minLength": 1
+              },
+              "targetLongitudeColumn": {
+                "type": "string",
+                "minLength": 1
+              },
+              "labelColumn": {
+                "type": "string",
+                "minLength": 1
+              },
+              "valueColumn": {
+                "type": "string",
+                "minLength": 1
+              },
+              "timeColumn": {
+                "type": "string",
+                "minLength": 1
+              },
+              "groupColumn": {
+                "type": "string",
+                "minLength": 1,
+                "description": "Required for routes: route identifier; grouped separately within each year."
+              },
+              "orderColumn": {
+                "type": "string",
+                "minLength": 1,
+                "description": "Required for routes: finite numeric vertex order, unique within route and year."
+              },
+              "unit": {
+                "type": "string",
+                "maxLength": 300,
+                "description": "Unit of the spatial observation value, separate from the country indicator. Default: no unit."
+              },
+              "valueLabel": {
+                "type": "string",
+                "maxLength": 300,
+                "description": "Label of the spatial observation value. Default: valueColumn name."
+              }
+            },
+            "allOf": [
+              {
+                "if": {
+                  "properties": {
+                    "kind": {
+                      "const": "points"
+                    }
+                  }
+                },
+                "then": {
+                  "required": [
+                    "latitudeColumn",
+                    "longitudeColumn"
+                  ]
+                }
+              },
+              {
+                "if": {
+                  "properties": {
+                    "kind": {
+                      "const": "flows"
+                    }
+                  }
+                },
+                "then": {
+                  "required": [
+                    "sourceLatitudeColumn",
+                    "sourceLongitudeColumn",
+                    "targetLatitudeColumn",
+                    "targetLongitudeColumn"
+                  ]
+                }
+              },
+              {
+                "if": {
+                  "properties": {
+                    "kind": {
+                      "const": "routes"
+                    }
+                  }
+                },
+                "then": {
+                  "required": [
+                    "latitudeColumn",
+                    "longitudeColumn",
+                    "groupColumn",
+                    "orderColumn"
+                  ]
+                }
+              }
+            ]
+          },
+          "column": {
+            "type": "string",
+            "description": "Value column in dataFile (not for timeseries)."
+          },
+          "dataFile": {
+            "type": "string",
+            "pattern": "^data/"
+          },
+          "codeColumn": {
+            "type": "string"
+          },
+          "nameColumn": {
+            "type": "string"
+          },
+          "legendTitle": {
+            "type": "string",
+            "description": "With units, e.g. Coverage (% of population)."
+          },
+          "unit": {
+            "type": "string",
+            "description": "Suffix such as %."
+          },
+          "prefix": {
+            "type": "string",
+            "description": "Prefix such as $."
+          },
+          "decimals": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 6
+          },
+          "palette": {
+            "type": "string",
+            "description": "A name from PALETTES in wb-carto.js. Recommended: Blues, Greens, Oranges, OrRd, WBG Blue."
+          },
+          "classes": {
+            "type": "integer",
+            "minimum": 2,
+            "maximum": 11,
+            "default": 5,
+            "description": "Number of classes; the palette's ramp for exactly this many."
+          },
+          "colors": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "pattern": "^#[0-9a-fA-F]{6}$"
+            },
+            "minItems": 2,
+            "description": "Custom colors, light to dark, only when the user asks. Not with palette."
+          },
+          "playInterval": {
+            "type": "integer",
+            "minimum": 200,
+            "description": "Milliseconds per year when playing a time series."
+          },
+          "dashboard": {
+            "type": "array",
+            "maxItems": 12,
+            "description": "Charts and a table below the map, in this order. They use this tab's values, classes and colors. Each type once (bar: once per order).",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "type"
+              ],
+              "allOf": [
+                {
+                  "if": {
+                    "properties": {
+                      "type": {
+                        "const": "explorer"
+                      },
+                      "layout": {
+                        "const": "scatter"
+                      }
+                    },
+                    "required": [
+                      "layout"
+                    ]
+                  },
+                  "then": {
+                    "required": [
+                      "xColumn"
+                    ]
+                  }
+                },
+                {
+                  "if": {
+                    "properties": {
+                      "type": {
+                        "not": {
+                          "const": "explorer"
+                        }
+                      }
+                    }
+                  },
+                  "then": {
+                    "not": {
+                      "anyOf": [
+                        {
+                          "required": [
+                            "layout"
+                          ]
+                        },
+                        {
+                          "required": [
+                            "xColumn"
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                }
+              ],
+              "properties": {
+                "type": {
+                  "enum": [
+                    "kpi",
+                    "bar",
+                    "dot",
+                    "lollipop",
+                    "histogram",
+                    "pie",
+                    "donut",
+                    "line",
+                    "area",
+                    "explorer",
+                    "table"
+                  ],
+                  "description": "kpi: economies with data, median, highest, lowest. bar, dot, lollipop: top or bottom economies. histogram: economies per legend class. pie, donut: share of economies in each legend class, including no data; never a sum of indicator values. line, area: median over time and the selected economy (timeseries tabs only). area is unstacked with a zero baseline and preserves missing gaps. explorer: linked country map, two-measure scatter using xColumn, and beeswarm. table: every economy, sortable and searchable."
+                },
+                "title": {
+                  "type": "string",
+                  "description": "Card title (a sensible default otherwise)."
+                },
+                "top": {
+                  "type": "integer",
+                  "minimum": 3,
+                  "maximum": 25,
+                  "default": 10,
+                  "description": "bar, dot, lollipop: how many economies."
+                },
+                "order": {
+                  "enum": [
+                    "highest",
+                    "lowest"
+                  ],
+                  "default": "highest",
+                  "description": "bar, dot, lollipop: highest or lowest values."
+                },
+                "layout": {
+                  "enum": [
+                    "map",
+                    "scatter",
+                    "beeswarm"
+                  ],
+                  "default": "beeswarm",
+                  "description": "explorer only: initial layout."
+                },
+                "xColumn": {
+                  "type": "string",
+                  "minLength": 1,
+                  "description": "explorer scatter: a second numeric column in the main country CSV. Required when layout is scatter."
+                },
+                "rows": {
+                  "type": "integer",
+                  "minimum": 5,
+                  "maximum": 50,
+                  "default": 10,
+                  "description": "table: rows shown before Show all."
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

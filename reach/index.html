@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>World map | World Bank</title>
+  <link rel="icon" href="data:,">
+  <!-- Error log read by tools/check.py. Keep it first. -->
+  <script>
+    window.WBMAP_ERRORS = [];
+    addEventListener('error', e => WBMAP_ERRORS.push(String(e.message || e.error)));
+    addEventListener('unhandledrejection', e => WBMAP_ERRORS.push(String(e.reason?.message || e.reason)));
+    console.error = (log => (...args) => { WBMAP_ERRORS.push(args.map(a => a?.message || String(a)).join(' ')); log(...args); })(console.error);
+  </script>
+  <link rel="stylesheet" href="style.css">
+  <script src="vendor/d3.min.js"></script>
+</head>
+<body>
+  <header>
+    <div><span class="eyebrow" id="eyebrow"></span><h1 id="title">World map</h1></div>
+    <nav id="tabs" aria-label="Choose map"></nav>
+    <details class="export">
+      <summary>Export ↗</summary>
+      <div>
+        <button id="export-png" type="button">Download map PNG</button>
+        <button id="export-svg" type="button">Download map SVG</button>
+        <button id="export-print-png" type="button">Download print PNG</button>
+        <button id="export-pdf" type="button">Print or save as PDF</button>
+        <button id="export-csv" type="button">Download data CSV</button>
+      </div>
+    </details>
+  </header>
+
+  <main>
+    <div id="map" aria-label="Interactive world map">
+      <div id="flat"></div>
+      <div id="globe" hidden></div>
+    </div>
+    <div class="map-controls" role="group" aria-label="Zoom">
+      <button id="zoom-in" type="button" aria-label="Zoom in" title="Zoom in">+</button>
+      <button id="zoom-out" type="button" aria-label="Zoom out" title="Zoom out">−</button>
+      <button id="zoom-home" type="button" aria-label="Reset world view" title="Reset world view">⌂</button>
+      <button id="zoom-full" type="button" aria-label="Full screen" title="Full screen">⛶</button>
+    </div>
+    <div class="map-panels">
+      <div class="search">
+        <label for="country">Find a country or economy</label>
+        <div class="combo">
+          <input id="country" type="text" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="country-list"
+            placeholder="Search by name or ISO code…" autocomplete="off" spellcheck="false">
+          <button id="country-clear" type="button" aria-label="Clear search" hidden>×</button>
+        </div>
+        <ul id="country-list" role="listbox" aria-label="Countries and economies" hidden></ul>
+      </div>
+      <div class="view-tools" role="group" aria-label="Map view">
+        <div class="segmented" role="group" aria-label="Projection">
+          <button id="view-flat" type="button" aria-pressed="true">Flat</button>
+          <button id="view-globe" type="button" aria-pressed="false">Globe</button>
+        </div>
+        <label class="tool">Basemap
+          <select id="basemap"><option value="none">None (white)</option><option value="lightGray">Light gray</option></select>
+        </label>
+        <label class="tool"><input id="topo" type="checkbox"> Topography</label>
+        <label class="tool"><input id="labels" type="checkbox"> Country names</label>
+      </div>
+      <div id="time-panel" role="group" aria-label="Year" hidden>
+        <button id="time-play" type="button" aria-label="Play">▶</button>
+        <input id="time-slider" type="range" step="1" aria-label="Year">
+        <span id="time-year"></span>
+      </div>
+    </div>
+    <aside id="legend">
+      <button id="legend-toggle" type="button" aria-expanded="true" aria-controls="legend-body">Map legend <span>−</span></button>
+      <div id="legend-body"></div>
+    </aside>
+    <div id="card" role="dialog" aria-live="polite" hidden></div>
+    <div id="status" role="status"></div>
+  </main>
+
+  <div id="dashboard" role="region" aria-label="Charts and table" hidden></div>
+
+  <footer>
+    <div class="footer-text">
+      <span id="source"></span> <span class="stamp" id="stamp"></span>
+      <p class="map-disclaimer" id="disclaimer"></p>
+    </div>
+    <img class="logo" id="logo" src="assets/gcs-logo.svg" alt="World Bank Group GCS logo" width="72" height="40">
+  </footer>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>
