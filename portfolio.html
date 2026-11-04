@@ -7,6 +7,7 @@
 <meta name="description" content="Brenan Andre, World Bank Cartography Unit: interactive maps, dashboards, print maps and major initiatives, June to October 2026.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Ccircle cx=%2716%27 cy=%2716%27 r=%2714%27 fill=%27%230071BC%27/%3E%3Cpath d=%27M2 16h28M16 2c5 4 5 24 0 28M16 2c-5 4-5 24 0 28%27 stroke=%27white%27 stroke-width=%272%27 fill=%27none%27/%3E%3C/svg%3E">
 <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="showcase.css">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -20,9 +21,9 @@
 </header>
 
 <main class="wrap" id="main">
-  <section aria-labelledby="priorities-title">
+  <section class="band" aria-labelledby="priorities-title">
     <div class="section-head">
-      <div><h2 id="priorities-title">Five priorities</h2><p class="meta" id="priorities-intro"></p></div>
+      <div><p class="eyebrow">June – October 2026</p><h2 id="priorities-title">Five priorities</h2><p class="meta" id="priorities-intro"></p></div>
     </div>
     <ol class="priorities" id="priorities"></ol>
   </section>
@@ -81,9 +82,9 @@
     <ol class="timeline" id="timeline"></ol>
   </section>
 
-  <section aria-labelledby="initiatives-title">
+  <section class="band" aria-labelledby="initiatives-title">
     <div class="section-head">
-      <h2 id="initiatives-title">Major initiatives</h2>
+      <div><p class="eyebrow">Beyond single maps</p><h2 id="initiatives-title">Major initiatives</h2></div>
       <p class="meta">From individual maps toward platform architecture, automation, self-service tooling, cloud infrastructure, GeoAI prototyping, data stewardship and capacity building.</p>
     </div>
     <div class="initiatives" id="initiatives"></div>
@@ -118,6 +119,7 @@
 <script src="data.js"></script>
 <script src="value-config.js"></script>
 <script src="print-maps.js"></script>
+<script src="showcase.js"></script>
 <script src="app.js"></script>
 </body>
 </html>
