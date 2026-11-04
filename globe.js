@@ -16,7 +16,7 @@ const AREA_ISO = {'DR Congo': 'COD', 'India': 'IND', 'Botswana': 'BWA', 'Dominic
   'Ukraine': 'UKR', 'Iraq': 'IRQ', 'Syria': 'SYR', 'Mali': 'MLI', 'Nauru': 'NRU', 'Liberia': 'LBR', 'Rwanda': 'RWA', 'South Africa': 'ZAF',
   'Timor-Leste': 'TLS', 'Angola': 'AGO', 'Zambia': 'ZMB'};
 // Interactive items that belong to one country (the rest orbit as workstreams).
-const MAP_ISO = {'lobito': 'AGO', 'angola-sync': 'AGO', 'jupiter-courts': 'DOM'};
+const MAP_ISO = {'angola-sync': 'AGO', 'jupiter-courts': 'DOM'};
 // Pin positions (a point inside each country, not the polygon centroid, which falls outside for some).
 const LL = {AGO: [-12.3, 17.6], BWA: [-22.2, 24.0], COD: [-2.9, 23.6], DOM: [18.8, -70.4], IND: [22.5, 79.0], IRQ: [33.1, 43.7],
   LBR: [6.4, -9.4], MLI: [17.4, -3.5], NRU: [-0.53, 166.93], RWA: [-1.95, 29.9], SSD: [7.3, 30.3], SYR: [35.0, 38.5],
@@ -39,7 +39,7 @@ P.maps.forEach(m => {
 const countryList = Object.values(countries).filter(c => LL[c.iso]).map(c => ({...c, total: c.prints.length + c.maps.length}))
   .sort((a, b) => b.total - a.total || a.name.localeCompare(b.name));
 const byIso = Object.fromEntries(countryList.map(c => [c.iso, c]));
-const streamList = [...streams.values()].sort((a, b) => b.maps.length - a.maps.length || a.ws.localeCompare(b.ws));
+const streamList = [...streams.values()];  // data.js order (Food & Nutrition Security is listed last on purpose)
 const regionalList = Object.entries(regional).sort((a, b) => b[1].length - a[1].length);
 const pendingCount = (P.pending || []).reduce((n, p) => n + (p.count || 0), 0);
 const areas = new Set(PRINTS.map(p => p.area)).size;
