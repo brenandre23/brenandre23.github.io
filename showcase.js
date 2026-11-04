@@ -52,6 +52,24 @@ function hbars(rows) {
 }
 const status = (kind, text) => `<span class="st st-${kind}">${kind === 'ok' ? '✓' : kind === 'prog' ? '◐' : '◔'} ${e(text)}</span>`;
 
+// ---------------------------------------------------------------- Journey (career timeline; no pay information)
+const JOURNEY = [
+  {when: '2019', what: 'Intern', detail: 'World Bank Cartography', ic: 'map'},
+  {when: '2019 – 2022', what: 'Part-time with the Bank', detail: 'BA in Human Environment; minors in Political Science and Geospatial Technologies', ic: 'layers'},
+  {when: 'After 2022', what: 'Consultant, year-round', detail: 'Through International Mapping Associates, alongside other work', ic: 'users'},
+  {when: 'Master’s', what: 'Erasmus Mundus Joint Master’s', detail: 'Geospatial Technologies, across leading European GIS universities; graduated top of the class', ic: 'spark'},
+  {when: 'May 2026', what: 'Full time with the Bank', detail: 'Cartography Unit, Global Corporate Solutions', ic: 'bolt', key: true},
+  {when: 'June 2026', what: 'Five priorities agreed', detail: 'Productivity, interactive applications, partnerships, project management, AI adoption', ic: 'shield', key: true, href: '#priorities-title'},
+  {when: 'Nov 2026', what: 'Delivered', detail: 'Production at volume, plus applications, self-service, reusable tools and AI capacity', ic: 'flask', key: true, href: '#initiatives-title'}
+];
+window.renderJourney = function () {
+  const el = $('journey'); if (!el) return;
+  el.innerHTML = JOURNEY.map((j, i) => `<li class="jn reveal${j.key ? ' is-key' : ''}" style="--i:${i}">
+    <span class="jn-dot">${icon(j.ic, 'ico sm')}</span>
+    <p class="jn-when">${e(j.when)}</p><h3>${j.href ? `<a href="${e(j.href)}">${e(j.what)}</a>` : e(j.what)}</h3><p class="jn-detail">${e(j.detail)}</p></li>`).join('');
+  activate(el.parentElement);
+};
+
 // ---------------------------------------------------------------- Five priorities
 window.renderPrioritiesShowcase = function (f) {
   const P = window.PORTFOLIO, PM = window.PRINT_MAPS || [];

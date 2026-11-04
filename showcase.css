@@ -171,3 +171,27 @@ main > section.band:first-child { margin-top: 0; padding-top: 32px; background: 
 @media (prefers-reduced-motion: reduce) {
   .reveal, .seg, .months .mb, .waffle i, .hb, .pc, .ini, .ini-img img { transition: none !important; }
 }
+
+/* ---------- Journey timeline ---------- */
+.journey { list-style: none; margin: 28px 0 0; padding: 0; display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 14px; position: relative; }
+.journey::before { content: ''; position: absolute; left: 3%; right: 3%; top: 21px; height: 2px;
+  background: linear-gradient(90deg, rgba(159, 220, 255, .15), var(--sx-cyan) 70%, var(--sx-cyan2)); }
+.jn { position: relative; text-align: center; padding-top: 0; }
+.jn-dot { position: relative; z-index: 1; width: 44px; height: 44px; margin: 0 auto 12px; border-radius: 50%; display: grid; place-items: center;
+  background: #0b2440; border: 1px solid var(--sx-line2); color: var(--sx-cyan2); }
+.jn.is-key .jn-dot { background: linear-gradient(135deg, var(--sx-cyan2), var(--sx-cyan)); color: #021526; border: 0; box-shadow: 0 0 0 6px rgba(57, 176, 255, .15), 0 0 24px rgba(57, 176, 255, .45); }
+.jn .ico.sm { color: inherit; }
+.jn-when { margin: 0; font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--sx-cyan); }
+.jn h3 { margin: 4px 0 0; font-size: 15px; line-height: 1.25; color: var(--sx-ink); }
+.jn h3 a { color: var(--sx-ink); text-decoration: none; border-bottom: 1px dashed var(--sx-line2); }
+.jn h3 a:hover { color: var(--sx-cyan2); border-color: var(--sx-cyan); }
+.jn-detail { margin: 6px 0 0; font-size: 13px; line-height: 1.4; color: var(--sx-ink2); }
+.jn.reveal { transition-delay: calc(var(--i) * 70ms); }
+main > section.journey-band:first-child { padding-bottom: 32px; }
+main > section.journey-band + section.band { margin-top: 0; padding-top: 24px; background: linear-gradient(180deg, var(--sx-bg2), var(--sx-bg)); }
+@media (max-width: 1100px) {
+  .journey { grid-template-columns: 1fr; gap: 0; }
+  .journey::before { left: 21px; right: auto; top: 0; bottom: 0; width: 2px; height: auto; background: linear-gradient(180deg, rgba(159, 220, 255, .15), var(--sx-cyan)); }
+  .jn { display: grid; grid-template-columns: 44px 1fr; column-gap: 14px; text-align: left; padding-bottom: 18px; }
+  .jn-dot { grid-row: 1 / span 3; margin: 0; }
+}

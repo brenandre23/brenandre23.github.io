@@ -64,6 +64,7 @@ function renderTimeline() {
 
 function renderPriorities() {
   $('priorities-intro').textContent = P.prioritiesIntro;
+  renderJourney();
   renderPrioritiesShowcase(portfolioFacts());
 }
 
