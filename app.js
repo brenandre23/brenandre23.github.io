@@ -77,6 +77,7 @@ function renderInitiatives() {
   $('initiatives').innerHTML = P.initiatives.map(x => `<article class="panel initiative" id="initiative-${esc(x.id)}">
     <h3>${esc(x.title)}</h3>${x.date ? `<p class="meta">${esc(fmtDate(x.date))}</p>` : ''}<p>${esc(x.summary)}</p>
     ${x.points.length ? `<ul>${x.points.map(p => `<li>${esc(p)}</li>`).join('')}</ul>` : ''}
+    ${x.links?.length ? `<div class="related links">${x.links.map(([label, href, note]) => `<a class="button" href="${esc(href)}" target="_blank" rel="noopener">${esc(label)} ↗</a>${note ? `<span class="meta">${esc(note)}</span>` : ''}`).join('')}</div>` : ''}
     ${x.maps.length ? `<div class="related"><span class="meta">See it:</span>${x.maps.map(id => `<button type="button" data-map="${esc(id)}">${esc(byId.get(id)?.title || id)}</button>`).join('')}</div>` : ''}
   </article>`).join('');
 }
@@ -208,9 +209,6 @@ function renderTreemap() {
     + '<span>Each tile is one deliverable, grouped by project or series. Hover for the title; click to open it.</span>';
 }
 
-// Opened from disk, the browser blocks the reach map's module scripts: show its picture instead.
-if (location.protocol === 'file:') document.querySelector('.reach-frame').outerHTML =
-  `<figure class="reach-still"><img src="static/reach.jpg" alt="World map of maps produced by country, most in the Democratic Republic of Congo, India, Botswana and the Dominican Republic."><figcaption class="meta">A picture of the map. Open this page from the web server to use the interactive version.</figcaption></figure>`;
 renderHeader(); renderPriorities(); renderGallery(); setupPrint(); renderPrint(); renderTreemap(); renderTimeline(); renderInitiatives(); renderFooter();
 onBreakpoint(() => { renderPrint(); renderTreemap(); });
 select(location.hash.slice(1));

@@ -82,6 +82,8 @@ button:disabled { opacity: .45; cursor: default; }
 .initiative li + li { margin-top: var(--sp-xxs); }
 .initiative .related { margin-top: var(--sp-s); display: flex; flex-wrap: wrap; gap: var(--sp-xs); font-size: var(--fs-s); }
 .initiative .related button { min-height: 36px; font-weight: 400; }
+.initiative .related.links { align-items: center; }
+.initiative .related.links .button { min-height: 36px; display: inline-flex; align-items: center; text-decoration: none; }
 
 .timeline { list-style: none; margin: 0; padding: 0; border-left: 2px solid var(--line); }
 .timeline li { position: relative; padding: 0 0 var(--sp-s) var(--sp-l); }

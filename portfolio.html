@@ -55,11 +55,6 @@
     <div id="gallery"></div>
   </section>
 
-  <section class="panel block-pad" aria-labelledby="reach-title">
-    <h2 id="reach-title">Where the maps are</h2>
-    <p class="meta">Country-specific maps and dashboards per country. This map is itself built with the World Bank webmap standard I developed (MapLibre GL and d3, World Bank boundaries and disputed-area rules, 119 automated checks passed).</p>
-    <div class="reach-frame"><iframe src="reach/index.html" title="Maps produced by country (World Bank webmap)"></iframe></div>
-  </section>
 
   <section aria-labelledby="print-title">
     <div class="section-head">
@@ -111,7 +106,7 @@
   <h2 id="built-title">How this site is built</h2>
   <ul>
     <li><strong>Charts:</strong> Apache ECharts 5 (SVG rendering, a text description of every chart for screen readers), themed with the World Bank brand tokens.</li>
-    <li><strong>Maps:</strong> the World Bank webmap standard I built: MapLibre GL JS and d3, Equal Earth projection, World Bank boundaries and disputed-area rules, and the standard’s automated checks (the reach map above passes all 119).</li>
+    <li><strong>Maps:</strong> the World Bank webmap standard I built: MapLibre GL JS and d3, Equal Earth projection, World Bank boundaries and disputed-area rules, and the standard’s automated checks (about 120 per map).</li>
     <li><strong>Front end:</strong> plain HTML, CSS and JavaScript with no build step; responsive from 360 to 1440 px; live embeds load one at a time.</li>
     <li><strong>Data:</strong> the content lives in small data files (<code>data.js</code>, <code>print-maps.js</code>), so adding a map is one line; thumbnails and print images are generated from the source PDFs.</li>
     <li><strong>Self-contained:</strong> fonts and libraries are bundled, so it runs on an internal server with no outside calls except the embedded maps themselves.</li>
